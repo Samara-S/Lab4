@@ -29,7 +29,58 @@ using namespace std;
 
 // BODY TEMPERATURE
 
+class bt {
 
+private:
+	int selection;
+	double temp;
+
+public:
+	void getInfo();
+	void getStatus();
+
+};
+
+void bt::getInfo() {
+
+	cout << "What was the obtained temperature? ";
+	cin >> temp;
+
+	cout << "How was the blood temperature test taken?"
+			"\n1. Orally"
+			"\n2. Rectally"
+			"\n3. Axillary"
+			"\n4. Through the ear"
+			"\n5. On the skin\n";
+	cin >> selection;
+
+	switch (selection) {
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	}
+
+}
+
+// divide into types
+
+class btTypes {
+
+private:
+
+public:
+	bt direct;
+	bt rectally;
+	bt axillary;
+
+};
 
 /****
  *
@@ -54,6 +105,8 @@ void pr::getInfo() {
 	cin >> bpm;
 	cout << "\nIs the patient an athlete? (yes/no): ";
 	cin >> athlete;
+	cout << "\nWould you like to add a comment? (yes/no) ";
+	// comment
 }
 
 void pr::getStatus() {
@@ -96,6 +149,8 @@ void rr::getInfo() {
 	cin >> numBreaths;
 	cout << "\nWas there any difficulty breathing noted? (yes/no): ";
 	cin >> difficulty;
+	cout << "\nWould you like to add a comment? (yes/no) ";
+	// comment
 }
 
 void rr::getStatus() {
@@ -129,6 +184,8 @@ void bp::getInfo() {
 	cin >> systolic;
 	cout << "\nPlease enter the diastolic pressure in mmHg: ";
 	cin >> diastolic;
+	cout << "\nWould you like to add a comment? (yes/no) ";
+	// comment
 }
 
 void bp::getStatus() {
