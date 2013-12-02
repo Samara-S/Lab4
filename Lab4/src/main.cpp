@@ -48,7 +48,7 @@ class rapid : public ut {
 
 private:
 	int ph;
-	string results[][];
+	string results[];
 
 public:
 	void getInfo();
@@ -59,23 +59,23 @@ public:
 void rapid::getInfo() {
 
 	cout << "\nPlease enter the pH value: ";
-	cin >> results[0][0];
+	cin >> results[0];
 	cout << "\nWas there a presence of protein? (yes/no) ";
-	cin >> results[1][0];
+	cin >> results[1];
 	cout << "\nWas there a presence of glucose? (yes/no) ";
-	cin >> results[2][0];
+	cin >> results[2];
 	cout << "\nWas there a presence of nitrites? (yes/no) ";
-	cin >> results[3][0];
+	cin >> results[3];
 	cout << "\nWas there a presence of ketones? (yes/no) ";
-	cin >> results[4][0];
+	cin >> results[4];
 	cout << "\nWas there a presence of bilirubin? (yes/no) ";
-	cin >> results[5][0];
+	cin >> results[5];
 	cout << "\nWas there a presence of urobilinogen? (yes/no) ";
-	cin >> results[6][0];
+	cin >> results[6];
 	cout << "\nWas there a presence of red blood cells? (yes/no) ";
-	cin >> results[7][0];
+	cin >> results[7];
 	cout << "\nWas there a presence of white blood cells? (yes/no) ";
-	cin >> results[8][0];
+	cin >> results[8];
 
 }
 
@@ -247,11 +247,15 @@ void rr::getInfo() {
 }
 
 string rr::getStatus() {
+
 	if ((difficulty == "yes") | (numBreaths > 16)) {
 		status = "problematic";
 	}
-	else status = "fine";
-	return string;
+	else {
+		status = "fine";
+	}
+
+	return status;
 }
 
 
@@ -298,6 +302,10 @@ string bp::getStatus() {
 
 
 int main() {
+
+	rapid test;
+
+	test.getInfo();
 
 	return 0;
 
