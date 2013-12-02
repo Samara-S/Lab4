@@ -28,11 +28,7 @@ int ut::typeTest() {
 
 	cout << "What type of urine test was it?"
 			"\n1. Rapid"
-			"\n2. Urinalysis"
-			"\n3. Culture"
-			"\n4. 24-Hour Sample"
-			"\n5. Pregnancy"
-			"\n6. Drugs\n";
+			"\n2. Urinalysis\n";
 	cin >> selection;
 
 	cout << "\nWould you like to add a comment? (yes/no) ";
@@ -49,6 +45,7 @@ class rapid : public ut {
 private:
 	int ph;
 	string results[];
+	string status = "";
 
 public:
 	void getInfo();
@@ -59,43 +56,134 @@ public:
 void rapid::getInfo() {
 
 	cout << "\nPlease enter the pH value: ";
-	cin >> results[0];
+	cin >> ph;
 	cout << "\nWas there a presence of protein? (yes/no) ";
-	cin >> results[1];
+	cin >> results[0];
 	cout << "\nWas there a presence of glucose? (yes/no) ";
-	cin >> results[2];
+	cin >> results[1];
 	cout << "\nWas there a presence of nitrites? (yes/no) ";
-	cin >> results[3];
+	cin >> results[2];
 	cout << "\nWas there a presence of ketones? (yes/no) ";
-	cin >> results[4];
+	cin >> results[3];
 	cout << "\nWas there a presence of bilirubin? (yes/no) ";
-	cin >> results[5];
+	cin >> results[4];
 	cout << "\nWas there a presence of urobilinogen? (yes/no) ";
-	cin >> results[6];
+	cin >> results[5];
 	cout << "\nWas there a presence of red blood cells? (yes/no) ";
-	cin >> results[7];
+	cin >> results[6];
 	cout << "\nWas there a presence of white blood cells? (yes/no) ";
-	cin >> results[8];
+	cin >> results[7];
 
 }
 
 void rapid::detectAbnormal() {
 
 if (ph < 5) {
+	if (status == "") {
+		status = "kidney stones";
+	}
+	else {
+		status = ", kidney stones";
+	}
+}
+else if (ph > 7) {
+	if (status == "") {
+		status = "urinary tract infection";
+	}
+	else {
+		status = ", urinary tract infection";
+	}
+}
 
+if (((results[0] | results[4] | results[5] | results[6]) == "yes")) {
+	if (status == "") {
+		status = "kidney disease/inflammation";
+	}
+	else {
+		status = ", kidney disease/inflammation";
+	}
+}
+else if (((results[1] | results[3]) == "yes")) {
+	if (status == "") {
+		status = "diabetes mellitus";
+	}
+	else {
+		status = ", diabetes mellitus";
+	}
+}
+else if (((results[2] | results[7]) == "yes")) {
+	if (status == "") {
+		status = "bacterial infection";
+	}
+	else {
+		status = ", bacterial infection";
+	}
+}
+
+if (status == "") {
+	status = "fine";
 }
 
 }
 
 // urine test: urinalysis
 
-// urine test: urine culture
+class urinalysis : public ut {
 
-// urine test: 24-hour sample
+private:
+	string results[];
+	string status = "";
 
-// urine test: pregnancy test
+public:
+	void getInfo();
+	void detectAbnormal();
 
-// urine test: drug test
+};
+
+void urinalysis::getInfo() {
+
+	cout << "\nWas there too little creatinine? (yes/no) ";
+	cin >> results[0];
+	cout << "\nWas there a presence of urinary casts? (yes/no) ";
+	cin >> results[1];
+	cout << "\nWas there a presence of crystals? (yes/no) ";
+	cin >> results[2];
+	cout << "\nWas there a presence of epithelial cells? (yes/no) ";
+
+};
+
+void urinalysis::detectAbnormal() {
+
+if (((results[0] | results[4] | results[5] | results[6]) == "yes")) {
+	if (status == "") {
+		status = "kidney disease/inflammation";
+	}
+	else {
+		status = ", kidney disease/inflammation";
+	}
+}
+else if (((results[1] | results[3]) == "yes")) {
+	if (status == "") {
+		status = "diabetes mellitus";
+	}
+	else {
+		status = ", diabetes mellitus";
+	}
+}
+else if (((results[2] | results[7]) == "yes")) {
+	if (status == "") {
+		status = "bacterial infection";
+	}
+	else {
+		status = ", bacterial infection";
+	}
+}
+
+if (status == "") {
+	status = "fine";
+}
+
+}
 
 /****
  *
@@ -302,10 +390,6 @@ string bp::getStatus() {
 
 
 int main() {
-
-	rapid test;
-
-	test.getInfo();
 
 	return 0;
 
