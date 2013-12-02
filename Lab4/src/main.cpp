@@ -120,9 +120,6 @@ void rapid::getInfo() {
 	cin >> results[7];
 	appendFile("white blood cells: " + results[7]);
 
-	cout << "\nWould you like to add a comment? (yes/no) ";
-	// comment
-
 }
 
 void rapid::detectAbnormal() {
@@ -193,15 +190,16 @@ void urinalysis::getInfo() {
 
 	cout << "\nWas there too little creatinine? (yes/no) ";
 	cin >> results[0];
+	appendFile("creatinine: " + results[0]);
 	cout << "\nWas there a presence of urinary casts? (yes/no) ";
 	cin >> results[1];
+	appendFile("urinary casts: " + results[1]);
 	cout << "\nWas there a presence of crystals? (yes/no) ";
 	cin >> results[2];
+	appendFile("crystals: " + results[2]);
 	cout << "\nWas there a presence of epithelial cells? (yes/no) ";
 	cin >> results[3];
-
-	cout << "\nWould you like to add a comment? (yes/no) ";
-	// comment
+	appendFile("epithelial cells: " + results[3]);
 
 };
 
@@ -244,7 +242,7 @@ void urinalysis::detectAbnormal() {
 
 // BODY TEMPERATURE
 
-class bt {
+class bt : public allTests {
 
 protected:
 	int selection;
@@ -269,9 +267,6 @@ int bt::typeTest() {
 			"\n4. Ear"
 			"\n5. Skin\n";
 	cin >> selection;
-
-	cout << "\nWould you like to add a comment? (yes/no) ";
-	// comment
 
 	return selection;
 
@@ -321,7 +316,7 @@ string bt::getStatus(int temp) {
 
 // PULSE RATE
 
-class pr {
+class pr : public allTests {
 
 private:
 	int bpm;
@@ -336,10 +331,10 @@ public:
 void pr::getInfo() {
 	cout << "\nPlease enter the number of beats per minute: ";
 	cin >> bpm;
+	appendFile("BPM: " + bpm);
 	cout << "\nIs the patient an athlete? (yes/no): ";
 	cin >> athlete;
-	cout << "\nWould you like to add a comment? (yes/no) ";
-	// comment
+	appendFile("Athlete: " + athlete);
 }
 
 string pr::getStatus() {
@@ -366,7 +361,7 @@ string pr::getStatus() {
 
 // RESPIRATORY RATE
 
-class rr {
+class rr : public allTests {
 
 private:
 	int numBreaths;
@@ -381,10 +376,10 @@ public:
 void rr::getInfo() {
 	cout << "\nPlease enter the number of breaths per minute: ";
 	cin >> numBreaths;
+	appendFile("Number of breaths: " + numBreaths);
 	cout << "\nWas there any difficulty breathing noted? (yes/no): ";
 	cin >> difficulty;
-	cout << "\nWould you like to add a comment? (yes/no) ";
-	// comment
+	appendFile("Difficulty noted: " + difficulty);
 }
 
 string rr::getStatus() {
@@ -406,7 +401,7 @@ string rr::getStatus() {
 
 // BLOOD PRESSURE
 
-class bp {
+class bp : public allTests {
 
 private:
 	int systolic;
@@ -423,8 +418,8 @@ void bp::getInfo() {
 	cin >> systolic;
 	cout << "\nPlease enter the diastolic pressure in mmHg: ";
 	cin >> diastolic;
-	cout << "\nWould you like to add a comment? (yes/no) ";
-	// comment
+
+	appendFile("Blood pressure: " + systolic + "/" + diastolic);
 }
 
 string bp::getStatus() {
@@ -477,44 +472,57 @@ int main() {
 			rt.detectAbnormal();
 			if (rt.status == "fine") {
 				cout << "\nThe patient's rapid urine test did not return any conclusive results.";
+				appendFile("\nThe patient's rapid urine test did not return any conclusive results.");
 			}
 			else {
 				cout << "\nThe patient's rapid urine test returned troubling results. The patient may be suffering from: \n--- ";
+				appendFile("\nThe patient's rapid urine test returned troubling results. The patient may be suffering from: \n--- ");
 			}
 		}
 		else if (urine.selection == 2) {
+			appendFile("\tURINALYSIS");
 			urinalysis ua;
 			ua.getInfo();
 			go.makeComment();
 			ua.detectAbnormal();
 			if (ua.status == "fine") {
 				cout << "\nThe patient's urinalysis test did not return any conclusive results.";
+				appendFile("\nThe patient's urinalysis test did not return any conclusive results.");
 			}
 			else if (ua.status == "problematic") {
 				cout << "\nThe patient's urinalysis test returned troubling results.";
+				appendFile("\nThe patient's urinalysis test returned troubling results.");
 			}
 			else {
-				cout << "\nThe patient's urinalysis test returned troubling results. The patient may be suffering from: \n--- ";
+				cout << "\nThe patient's urinalysis test returned troubling results. The patient may be suffering from: \n--- " << ua.status;
+				appendFile("\nThe patient's urinalysis test returned troubling results. The patient may be suffering from: \n--- " + ua.status);
 			}
 		}
 	}
 	else if (go.choice == 2) {
+		appendFile("BODY TEMPERATURE TEST");
 		bt body;
 		body.typeTest;
 		go.makeComment();
 		if (body.selection == (1 | 4 | 5)) {
+			appendFile("\tDIRECT TEST");
 			body.getStatus(body.measured);
 		}
 		else if (body.selection == 2) {
+			appendFile("\RECTAL TEST");
 			rectal bodyt;
 			cout << "\n---The patient likely is " << bodyt.getStatus(bodyt.actualTemp());
+			appendFile("\n---The patient likely is " + bodyt.getStatus(bodyt.actualTemp()));
 		}
 		else if (body.selection == 3) {
+			appendFile("\AXILLARY TEST");
 			axillary bodyte;
 			cout << "\n---The patient likely is " << bodyte.getStatus(bodyte.actualTemp());
+			appendFile("\n---The patient likely is " + bodyte.getStatus(bodyte.actualTemp()));
 		}
 	}
 	else if (go.choice == 3) {
+		appendFile("PULSE RATE TEST");
 		pr pulse;
 		pulse.getInfo();
 		go.makeComment();
@@ -522,12 +530,15 @@ int main() {
 
 		if (pulse.getStatus() == "fine") {
 			cout << "\nThe patient's pulse rate test did not return any conclusive results.";
+			appendFile("\nThe patient's pulse rate test did not return any conclusive results.");
 		}
 		else if (pulse.getStatus() == "problematic") {
 			cout << "\nThe patient's pulse rate test returned troubling results.";
+			appendFile("\nThe patient's pulse rate test returned troubling results.");
 		}
 	}
 	else if (go.choice == 4) {
+		appendFile("RESPIRATORY RATE TEST");
 		rr resp;
 		resp.getInfo();
 		go.makeComment();
@@ -535,12 +546,15 @@ int main() {
 
 		if (resp.getStatus() == "fine") {
 			cout << "\nThe patient's respiratory rate test did not return any conclusive results.";
+			appendFile("\nThe patient's respiratory rate test did not return any conclusive results.");
 		}
 		else if (resp.getStatus() == "problematic") {
 			cout << "\nThe patient's respiratory rate test returned troubling results.";
+			appendFile("\nThe patient's respiratory rate test returned troubling results.");
 		}
 	}
 	else if (go.choice == 5) {
+		appendFile("BLOOD PRESSURE TEST");
 		bp pres;
 		pres.getInfo();
 		go.makeComment();
@@ -548,9 +562,11 @@ int main() {
 
 		if (pres.getStatus() == "fine") {
 			cout << "\nThe patient's blood pressure test did not return any conclusive results.";
+			appendFile("\nThe patient's blood pressure test did not return any conclusive results.");
 		}
 		else if (pres.getStatus() == "problematic") {
 			cout << "\nThe patient's blood pressure test returned troubling results.";
+			appendFile("\nThe patient's blood pressure test returned troubling results.");
 		}
 	}
 
