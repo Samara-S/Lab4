@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <fstream>
 #include <string>
 using namespace std;
 
@@ -14,8 +15,12 @@ using namespace std;
 class allTests {
 protected:
 	int choice;
+	string comment;
+	string name;
+	string id;
 public:
 	void chooseTest();
+	void makeComment();
 };
 
 void allTests::chooseTest () {
@@ -28,13 +33,26 @@ void allTests::chooseTest () {
 	cin >> choice;
 }
 
+void allTests::makeComment() {
+	cout << "\nWould you like to add a comment? (yes/no) ";
+	if (cin >> "yes") {
+		cout << "\nPlease enter your name: ";
+		cin >> name;
+		cout << "\nPlease enter your ID: ";
+		cin >> id;
+		cout << "\nEnter your comment(s): ";
+		cin >> comment;
+	}
+	appendFile(name + id + ": " + "comment");
+}
+
 /*
  *
  */
 
 // URINE TESTS
 
-class ut {
+class ut : public allTests {
 
 private:
 
@@ -54,11 +72,7 @@ int ut::typeTest() {
 			"\n2. Urinalysis\n";
 	cin >> selection;
 
-	cout << "\nWould you like to add a comment? (yes/no) ";
-	// comment
-
 	return selection;
-
 }
 
 // urine test: rapid
@@ -80,22 +94,31 @@ void rapid::getInfo() {
 
 	cout << "\nPlease enter the pH value: ";
 	cin >> ph;
+	appendFile("pH: " + string(ph));
 	cout << "\nWas there a presence of protein? (yes/no) ";
 	cin >> results[0];
+	appendFile("protein: " + results[0]);
 	cout << "\nWas there a presence of glucose? (yes/no) ";
 	cin >> results[1];
+	appendFile("glucose: " + results[1]);
 	cout << "\nWas there a presence of nitrites? (yes/no) ";
 	cin >> results[2];
+	appendFile("nitrites: " + results[2]);
 	cout << "\nWas there a presence of ketones? (yes/no) ";
 	cin >> results[3];
+	appendFile("ketones: " + results[3]);
 	cout << "\nWas there a presence of bilirubin? (yes/no) ";
 	cin >> results[4];
+	appendFile("bilirubin: " + results[4]);
 	cout << "\nWas there a presence of urobilinogen? (yes/no) ";
 	cin >> results[5];
+	appendFile("urobilinogen: " + results[5]);
 	cout << "\nWas there a presence of red blood cells? (yes/no) ";
 	cin >> results[6];
+	appendFile("red blood cells: " + results[6]);
 	cout << "\nWas there a presence of white blood cells? (yes/no) ";
 	cin >> results[7];
+	appendFile("white blood cells: " + results[7]);
 
 	cout << "\nWould you like to add a comment? (yes/no) ";
 	// comment
@@ -417,6 +440,23 @@ string bp::getStatus() {
 	return status;
 }
 
+/*
+ *
+ */
+
+// add to file
+
+void appendFile (string sent) {
+	ofstream outfile;
+
+	outfile.open("log.txt", ios_base::app);
+	outfile << "\n" << sent;
+	outfile.close;
+}
+
+/*
+ *
+ */
 
 
 int main() {
@@ -426,11 +466,14 @@ int main() {
 	go.chooseTest();
 
 	if (go.choice == 1) {
+		appendFile("URINE TEST");
 		ut urine;
 		urine.typeTest();
 		if (urine.selection == 1) {
+			appendFile("\tRAPID TEST");
 			rapid rt;
 			rt.getInfo();
+			go.makeComment();
 			rt.detectAbnormal();
 			if (rt.status == "fine") {
 				cout << "\nThe patient's rapid urine test did not return any conclusive results.";
@@ -442,6 +485,7 @@ int main() {
 		else if (urine.selection == 2) {
 			urinalysis ua;
 			ua.getInfo();
+			go.makeComment();
 			ua.detectAbnormal();
 			if (ua.status == "fine") {
 				cout << "\nThe patient's urinalysis test did not return any conclusive results.";
@@ -457,6 +501,7 @@ int main() {
 	else if (go.choice == 2) {
 		bt body;
 		body.typeTest;
+		go.makeComment();
 		if (body.selection == (1 | 4 | 5)) {
 			body.getStatus(body.measured);
 		}
@@ -472,6 +517,7 @@ int main() {
 	else if (go.choice == 3) {
 		pr pulse;
 		pulse.getInfo();
+		go.makeComment();
 		pulse.getStatus();
 
 		if (pulse.getStatus() == "fine") {
@@ -484,6 +530,7 @@ int main() {
 	else if (go.choice == 4) {
 		rr resp;
 		resp.getInfo();
+		go.makeComment();
 		resp.getStatus();
 
 		if (resp.getStatus() == "fine") {
@@ -496,6 +543,7 @@ int main() {
 	else if (go.choice == 5) {
 		bp pres;
 		pres.getInfo();
+		go.makeComment();
 		pres.getStatus();
 
 		if (pres.getStatus() == "fine") {
