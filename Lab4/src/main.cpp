@@ -11,7 +11,81 @@ using namespace std;
 
 // URINE TESTS
 
+class ut {
+
+private:
+
+protected:
+	int selection;
+
+public:
+	int typeTest();
+	string getStatus();
+
+};
+
+int ut::typeTest() {
+
+	cout << "What type of urine test was it?"
+			"\n1. Rapid"
+			"\n2. Urinalysis"
+			"\n3. Culture"
+			"\n4. 24-Hour Sample"
+			"\n5. Pregnancy"
+			"\n6. Drugs\n";
+	cin >> selection;
+
+	cout << "\nWould you like to add a comment? (yes/no) ";
+	// comment
+
+	return selection;
+
+}
+
 // urine test: rapid
+
+class rapid : public ut {
+
+private:
+	int ph;
+	string results[][];
+
+public:
+	void getInfo();
+	void detectAbnormal();
+
+};
+
+void rapid::getInfo() {
+
+	cout << "\nPlease enter the pH value: ";
+	cin >> results[0][0];
+	cout << "\nWas there a presence of protein? (yes/no) ";
+	cin >> results[1][0];
+	cout << "\nWas there a presence of glucose? (yes/no) ";
+	cin >> results[2][0];
+	cout << "\nWas there a presence of nitrites? (yes/no) ";
+	cin >> results[3][0];
+	cout << "\nWas there a presence of ketones? (yes/no) ";
+	cin >> results[4][0];
+	cout << "\nWas there a presence of bilirubin? (yes/no) ";
+	cin >> results[5][0];
+	cout << "\nWas there a presence of urobilinogen? (yes/no) ";
+	cin >> results[6][0];
+	cout << "\nWas there a presence of red blood cells? (yes/no) ";
+	cin >> results[7][0];
+	cout << "\nWas there a presence of white blood cells? (yes/no) ";
+	cin >> results[8][0];
+
+}
+
+void rapid::detectAbnormal() {
+
+if (ph < 5) {
+
+}
+
+}
 
 // urine test: urinalysis
 
@@ -37,12 +111,12 @@ protected:
 	string status;
 
 public:
-	int getInfo();
+	int typeTest();
 	string getStatus(int temp);
 
 };
 
-int bt::getInfo() {
+int bt::typeTest() {
 
 	cout << "What was the obtained temperature in F? ";
 	cin >> measured;
@@ -225,6 +299,6 @@ string bp::getStatus() {
 
 int main() {
 
-return 0;
+	return 0;
 
 }
