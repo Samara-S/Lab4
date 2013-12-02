@@ -47,7 +47,7 @@ public:
 };
 
 //Functions for IgG
-IgGMarkers::getSerum():getBC(){
+IgGMarkers::getIgG():getBC(){
 	cout << "What is the Serum IgG?\n";
 	cin >> IgGSerum;
 	cout << "What is the CSF IgG?\n";
@@ -80,7 +80,18 @@ Cholesterol::checkDL(){
 	//Similar to checkBC
 }
 
-//CoagulationMarkers to
+//CoagulationMarkers to Proteins and other coagulants
 class CoagulationMarkers : public BloodCount{
+public:
+	int proteinC;
+	int proteinS;
+	int PTT;
+	int Homocysteine;
 
+	void getCM();
+	void checkCM();
 };
+
+CoagulationMarkers::getCM():getBC(){
+
+}
