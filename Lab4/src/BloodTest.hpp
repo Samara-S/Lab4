@@ -8,6 +8,7 @@ class BloodCount {
 	private:
 	int RBC;
 	int WBC;
+	int platelets;
 	int BCcomment;
 
 	void getBC ();
@@ -20,6 +21,8 @@ BloodCount::getBC(){
 	cin >> RBC;
 	cout << "What is the White Blood Cell Count?\n";
 	cin >> WBC;
+	cout << "What is the Platelets Count?\n";
+	cin >> platelets;
 	cout << "Any comments";
 	cin >> BCcomment;
 }
@@ -37,6 +40,14 @@ BloodCount::CheckBC(){
 	} else {
 		cout << "WBC Abnormal";
 	}
+
+	if (platelets>=140000 && platelets<=450000){
+			cout << "Platelets Normal";
+		} else {
+			cout << "Platelets Abnormal";
+		}
+
+
 }
 //IgGMarkers looks for signs that the patient has had certain diseases in the past
 
