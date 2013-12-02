@@ -4,25 +4,22 @@ using namespace std;
 //BloodCount will be the base class common to all derived classes
 
 class BloodCount {
-	public:
+	private:
 	int RBC;
 	int WBC;
 
-	void getRBC ();
-	void getWBC ();
+	void getBC ();
 	void CheckBC ();
 };
 
-//void getRBC(); will get the patients RBC count
-BloodCount::getRBC(){
+//void getBC(); will get the patients RBC and WBC count
+BloodCount::getBC(){
 	cout << "What is the Red Blood Cell Count?\n";
 	cin >> RBC;
-}
-//void getWBC() will get the patients WBC count
-BloodCount::getWBC(){
 	cout << "What is the White Blood Cell Count?\n";
 	cin >> WBC;
 }
+
 //void CheckBC() will check if they're in normal ranges
 BloodCount::CheckBC(){
 	if(RBC>=4000000 && RBC<=6000000){
@@ -40,15 +37,50 @@ BloodCount::CheckBC(){
 //IgGMarkers looks for signs that the patient has had certain diseases in the past
 
 class IgGMarkers : public BloodCount {
+public:
+	int IgGSerum;
+	int IgGCSF;
+	int IgGRatio;
 
+	void getIgG();
+	void CheckIgG();
 };
+
+//Functions for IgG
+IgGMarkers::getSerum():getBC(){
+	cout << "What is the Serum IgG?\n";
+	cin >> IgGSerum;
+	cout << "What is the CSF IgG?\n";
+	cin >> IgGCSF;
+	cout << "What is the IgG Ratio?\n";
+	cin >> IgGRatio;
+}
+
+IgGMarkers::CheckIgG(){
+	//Like the CheckBC it will check if the IgG values are in normal ranges
+}
+
 
 //Cholesterol checks on the patients LDL and HDL
 
 class Cholesterol : public BloodCount{
+public:
+	int LDL;
+	int HDL;
 
+	void getDL();
+	void checkDL();
 };
 
+Cholesterol::getDL():getBC(){
+	//Similar to getIgG
+}
+
+Cholesterol::checkDL(){
+	//Similar to checkBC
+}
+
+//CoagulationMarkers to
 class CoagulationMarkers : public BloodCount{
 
 };
