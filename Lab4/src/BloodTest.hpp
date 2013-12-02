@@ -48,8 +48,6 @@ BloodCount::CheckBC(){
 		} else {
 			cout << "Platelets Abnormal";
 		}
-
-
 }
 //IgGMarkers looks for signs that the patient has had certain diseases in the past
 
@@ -77,7 +75,23 @@ IgGMarkers::getIgG():getBC(){
 }
 
 IgGMarkers::CheckIgG(){
-	//Like the CheckBC it will check if the IgG values are in normal ranges
+	if(IgGSerum>=0.2 && IgG<=4.2){
+		cout << "IgG Serum Normal\n";
+	} else {
+		cout << "IgG Serum Abnormal\n";
+	}
+
+	if (IgGCSF>=4.5 && IgGCSF<=10){
+		cout << "IgG CSF Normal";
+	} else {
+		cout << "IgG CSF Abnormal";
+	}
+
+	if (platelets>=140000 && platelets<=450000){
+			cout << "Platelets Normal";
+		} else {
+			cout << "Platelets Abnormal";
+		}
 }
 
 
