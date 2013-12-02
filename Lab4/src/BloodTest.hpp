@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 //BloodCount will be the base class common to all derived classes
@@ -7,6 +8,7 @@ class BloodCount {
 	private:
 	int RBC;
 	int WBC;
+	int BCcomment;
 
 	void getBC ();
 	void CheckBC ();
@@ -18,6 +20,8 @@ BloodCount::getBC(){
 	cin >> RBC;
 	cout << "What is the White Blood Cell Count?\n";
 	cin >> WBC;
+	cout << "Any comments";
+	cin >> BCcomment;
 }
 
 //void CheckBC() will check if they're in normal ranges
@@ -41,6 +45,7 @@ public:
 	int IgGSerum;
 	int IgGCSF;
 	int IgGRatio;
+	string IgGcomment;
 
 	void getIgG();
 	void CheckIgG();
@@ -54,6 +59,8 @@ IgGMarkers::getIgG():getBC(){
 	cin >> IgGCSF;
 	cout << "What is the IgG Ratio?\n";
 	cin >> IgGRatio;
+	cout << "Any comments?";
+	cin >> IgGcomment;
 }
 
 IgGMarkers::CheckIgG(){
@@ -67,6 +74,7 @@ class Cholesterol : public BloodCount{
 public:
 	int LDL;
 	int HDL;
+	string DLcomment;
 
 	void getDL();
 	void checkDL();
@@ -87,6 +95,7 @@ public:
 	int proteinS;
 	int PTT;
 	int Homocysteine;
+	string CMcomment;
 
 	void getCM();
 	void checkCM();
