@@ -77,7 +77,7 @@ Cholesterol::getDL():getBC(){
 }
 
 Cholesterol::checkDL(){
-	//Similar to checkBC
+	//Similar to checkBC but for IgGs
 }
 
 //CoagulationMarkers to Proteins and other coagulants
@@ -93,5 +93,9 @@ public:
 };
 
 CoagulationMarkers::getCM():getBC(){
+	//Similar to getIgG() but for CMs
+}
 
+CoagulationMarkers::checkCM(){
+	//Similar to check BC but for CMs
 }
