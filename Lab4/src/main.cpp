@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 using namespace std;
 
 
@@ -22,7 +23,6 @@ void appendFile (string sent) {
 
 	outfile.open("log.txt", ios_base::app);
 	outfile << "\n" << sent;
-	outfile.close;
 }
 
 //// ALL PHYSICAL TESTS
@@ -74,11 +74,11 @@ class ut : public allTests {
 private:
 
 protected:
-	int selection;
 
 public:
 	int typeTest();
 	string getStatus();
+	int selection;
 
 };
 
@@ -99,9 +99,9 @@ class rapid : public ut {
 private:
 	int ph;
 	string results[];
-	string status = "";
 
 public:
+	string status;
 	void getInfo();
 	void detectAbnormal();
 
@@ -111,7 +111,7 @@ void rapid::getInfo() {
 
 	cout << "\nPlease enter the pH value: ";
 	cin >> ph;
-	appendFile("pH: " + string(ph));
+	appendFile("pH: " + ph);
 	cout << "\nWas there a presence of protein? (yes/no) ";
 	cin >> results[0];
 	appendFile("protein: " + results[0]);
@@ -158,7 +158,7 @@ void rapid::detectAbnormal() {
 		}
 	}
 
-	if (((results[0] | results[4] | results[5] | results[6]) == "yes")) {
+	if ((results[0] == "yes") | (results[4] == "yes") | (results[5] == "yes") | (results[6]== "yes")) {
 		if (status == "") {
 			status = "kidney disease/inflammation";
 		}
@@ -166,7 +166,7 @@ void rapid::detectAbnormal() {
 			status = ", kidney disease/inflammation";
 		}
 	}
-	else if (((results[1] | results[3]) == "yes")) {
+	else if (((results[1] == "yes") | (results[3] == "yes"))) {
 		if (status == "") {
 			status = "diabetes mellitus";
 		}
@@ -174,7 +174,7 @@ void rapid::detectAbnormal() {
 			status = ", diabetes mellitus";
 		}
 	}
-	else if (((results[2] | results[7]) == "yes")) {
+	else if (((results[2] == "yes") | (results[7] == "yes"))) {
 		if (status == "") {
 			status = "bacterial infection";
 		}
@@ -195,11 +195,11 @@ class urinalysis : public ut {
 
 private:
 	string results[];
-	string status = "";
 
 public:
 	void getInfo();
 	void detectAbnormal();
+	string status;
 
 };
 
@@ -230,7 +230,7 @@ void urinalysis::detectAbnormal() {
 			status = ", kidneys not filtering properly";
 		}
 	}
-	else if (results[1]) {
+	else if ((results[1]) == "yes") {
 		if (status == "") {
 			status = "kidney disease";
 		}
@@ -238,7 +238,7 @@ void urinalysis::detectAbnormal() {
 			status = ", kidney disease";
 		}
 	}
-	else if (((results[2] | results[3]) == "yes")) {
+	else if ((results[2] == "yes") | (results[3] == "yes")) {
 		if (status == "") {
 			status = "problematic";
 		}
@@ -262,13 +262,13 @@ void urinalysis::detectAbnormal() {
 class bt : public allTests {
 
 protected:
-	int selection;
-	double measured;
 	string status;
 
 public:
 	int typeTest();
 	string getStatus(int temp);
+	int selection;
+	double measured;
 
 };
 
@@ -431,12 +431,18 @@ public:
 };
 
 void bp::getInfo() {
+
+	stringstream sstm;
+	string send;
 	cout << "\nPlease enter the systolic pressure in mmHg: ";
 	cin >> systolic;
 	cout << "\nPlease enter the diastolic pressure in mmHg: ";
 	cin >> diastolic;
 
-	appendFile("Blood pressure: " + systolic + "/" + diastolic);
+	sstm << "Blood pressure: " << systolic << "/" << diastolic;
+	send = sstm.str();
+
+	appendFile(send);
 }
 
 string bp::getStatus() {
@@ -506,20 +512,20 @@ int main() {
 	else if (go.choice == 2) {
 		appendFile("BODY TEMPERATURE TEST");
 		bt body;
-		body.typeTest;
+		body.typeTest();
 		go.makeComment();
 		if (body.selection == (1 | 4 | 5)) {
 			appendFile("\tDIRECT TEST");
 			body.getStatus(body.measured);
 		}
 		else if (body.selection == 2) {
-			appendFile("\RECTAL TEST");
+			appendFile("\tRECTAL TEST");
 			rectal bodyt;
 			cout << "\n---The patient likely is " << bodyt.getStatus(bodyt.actualTemp());
 			appendFile("\n---The patient likely is " + bodyt.getStatus(bodyt.actualTemp()));
 		}
 		else if (body.selection == 3) {
-			appendFile("\AXILLARY TEST");
+			appendFile("\tAXILLARY TEST");
 			axillary bodyte;
 			cout << "\n---The patient likely is " << bodyte.getStatus(bodyte.actualTemp());
 			appendFile("\n---The patient likely is " + bodyte.getStatus(bodyte.actualTemp()));
