@@ -32,12 +32,14 @@ int main() {
 				if (i < 50){
 					admitted1[i].getinfo();
 					admitted1[i].getstatus();
+					i++;
 				}
 
 			} else if (option == '2'){
 				if (i < 50){
 					admitted2[i].getinfo();
 					admitted2[i].getstatus();
+					i++;
 				}
 			}
 	}
