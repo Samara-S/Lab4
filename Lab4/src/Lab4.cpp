@@ -7,10 +7,11 @@
 //============================================================================
 
 #include <iostream>
+#include "BloodTest.hpp"
 using namespace std;
 
 int main() {
-	cout << "Hello World!!!" << endl; // prints Hello World!!!
-	cout << "Making sure it's not a fluke";
+	cout << "BME506 Lab4\n\nSamara Seepersad and Jennifer Chan" << endl;
+
 	return 0;
 }
