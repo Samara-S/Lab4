@@ -87,10 +87,10 @@ IgGMarkers::CheckIgG(){
 		cout << "IgG CSF Abnormal";
 	}
 
-	if (platelets>=140000 && platelets<=450000){
-			cout << "Platelets Normal";
+	if (IgGRatio>=0 && IgGRatio<=1){
+			cout << "IgG Ratio Normal";
 		} else {
-			cout << "Platelets Abnormal";
+			cout << "IgG Ratio Abnormal";
 		}
 }
 
@@ -109,7 +109,14 @@ public:
 };
 
 Cholesterol::getDL():getBC(){
-	//Similar to getIgG
+	cout << "What is the Total Cholesterol?\n";
+	cin >> TotalCholesterol;
+	cout << "What is the LDL?\n";
+	cin >> LDL;
+	cout << "What is the HDL?\n";
+	cin >> HDL;
+	cout << "Any comments?";
+	cin >> DLcomment;
 }
 
 Cholesterol::checkDL(){
@@ -130,7 +137,14 @@ public:
 };
 
 CoagulationMarkers::getCM():getBC(){
-	//Similar to getIgG() but for CMs
+	cout << "What is the Serum IgG?\n";
+	cin >> IgGSerum;
+	cout << "What is the CSF IgG?\n";
+	cin >> IgGCSF;
+	cout << "What is the IgG Ratio?\n";
+	cin >> IgGRatio;
+	cout << "Any comments?";
+	cin >> IgGcomment;
 }
 
 CoagulationMarkers::checkCM(){
