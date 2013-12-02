@@ -2,6 +2,8 @@
 #include <string>
 using namespace std;
 
+//BloodTest classes done by Samara Seepersad (500 396 756)
+
 //BloodCount will be the base class common to all derived classes
 
 class BloodCount {
