@@ -11,6 +11,17 @@
 #include "main.cpp"
 using namespace std;
 
+void AddNewTest{
+	//The purpose of this function is to add a new test to the patient file that is currently being looked at
+}
+
+void AddComment{
+	//The purpose of this function is to add comments to the patient test that is currently being looked at
+}
+
+void GenerateReport{
+	//The purpose of this function is to generate a report of all the patient tests that are on file
+}
 int main() {
 	cout << "BME506 Lab4\n\nSamara Seepersad and Jennifer Chan" << endl;
 
