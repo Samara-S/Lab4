@@ -154,28 +154,28 @@ void urinalysis::getInfo() {
 
 void urinalysis::detectAbnormal() {
 
-if (((results[0] | results[4] | results[5] | results[6]) == "yes")) {
+if ((results[0] == "yes")) {
 	if (status == "") {
-		status = "kidney disease/inflammation";
+		status = "kidneys not filtering properly";
 	}
 	else {
-		status = ", kidney disease/inflammation";
+		status = ", kidneys not filtering properly";
 	}
 }
-else if (((results[1] | results[3]) == "yes")) {
+else if (results[1]) {
 	if (status == "") {
-		status = "diabetes mellitus";
+		status = "kidney disease";
 	}
 	else {
-		status = ", diabetes mellitus";
+		status = ", kidney disease";
 	}
 }
-else if (((results[2] | results[7]) == "yes")) {
+else if (((results[2] | results[3]) == "yes")) {
 	if (status == "") {
-		status = "bacterial infection";
+		status = "problematic";
 	}
 	else {
-		status = ", bacterial infection";
+		status = ", problematic";
 	}
 }
 
