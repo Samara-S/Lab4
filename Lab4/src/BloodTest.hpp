@@ -83,6 +83,7 @@ IgGMarkers::CheckIgG(){
 
 class Cholesterol : public BloodCount{
 public:
+	int TotalCholesterol;
 	int LDL;
 	int HDL;
 	string DLcomment;
