@@ -10,15 +10,30 @@
 #include <string>
 using namespace std;
 
+
+/*
+ *
+ */
+
+// add to file
+
+void appendFile (string sent) {
+	ofstream outfile;
+
+	outfile.open("log.txt", ios_base::app);
+	outfile << "\n" << sent;
+	outfile.close;
+}
+
 //// ALL PHYSICAL TESTS
 
 class allTests {
 protected:
-	int choice;
 	string comment;
 	string name;
 	string id;
 public:
+	int choice;
 	void chooseTest();
 	void makeComment();
 };
@@ -34,8 +49,10 @@ void allTests::chooseTest () {
 }
 
 void allTests::makeComment() {
+	string read;
 	cout << "\nWould you like to add a comment? (yes/no) ";
-	if (cin >> "yes") {
+	cin >> read;
+	if (read == "yes") {
 		cout << "\nPlease enter your name: ";
 		cin >> name;
 		cout << "\nPlease enter your ID: ";
@@ -435,19 +452,6 @@ string bp::getStatus() {
 	return status;
 }
 
-/*
- *
- */
-
-// add to file
-
-void appendFile (string sent) {
-	ofstream outfile;
-
-	outfile.open("log.txt", ios_base::app);
-	outfile << "\n" << sent;
-	outfile.close;
-}
 
 /*
  *
