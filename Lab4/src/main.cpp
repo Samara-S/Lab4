@@ -283,10 +283,10 @@ string bt::getStatus(int temp) {
 		status = "fine";
 	}
 	else if (temp > 99.6) {
-		status = "fever";
+		status = "suffering from a fever";
 	}
 	else if (temp < 95) {
-		status = "hypothermia";
+		status = "suffering from hypothermia";
 	}
 
 	return status;
@@ -462,15 +462,48 @@ int main() {
 		}
 		else if (body.selection == 2) {
 			rectal bodyt;
-			bodyt.getStatus(bodyt.actualTemp());
+			cout << "\n---The patient likely is " << bodyt.getStatus(bodyt.actualTemp());
 		}
 		else if (body.selection == 3) {
 			axillary bodyte;
-			bodyte.getStatus(bodyte.actualTemp());
+			cout << "\n---The patient likely is " << bodyte.getStatus(bodyte.actualTemp());
 		}
 	}
 	else if (go.choice == 3) {
+		pr pulse;
+		pulse.getInfo();
+		pulse.getStatus();
 
+		if (pulse.getStatus() == "fine") {
+			cout << "\nThe patient's pulse rate test did not return any conclusive results.";
+		}
+		else if (pulse.getStatus() == "problematic") {
+			cout << "\nThe patient's pulse rate test returned troubling results.";
+		}
+	}
+	else if (go.choice == 4) {
+		rr resp;
+		resp.getInfo();
+		resp.getStatus();
+
+		if (resp.getStatus() == "fine") {
+			cout << "\nThe patient's respiratory rate test did not return any conclusive results.";
+		}
+		else if (resp.getStatus() == "problematic") {
+			cout << "\nThe patient's respiratory rate test returned troubling results.";
+		}
+	}
+	else if (go.choice == 5) {
+		bp pres;
+		pres.getInfo();
+		pres.getStatus();
+
+		if (pres.getStatus() == "fine") {
+			cout << "\nThe patient's blood pressure test did not return any conclusive results.";
+		}
+		else if (pres.getStatus() == "problematic") {
+			cout << "\nThe patient's blood pressure test returned troubling results.";
+		}
 	}
 
 	return 0;
