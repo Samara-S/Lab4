@@ -31,56 +31,74 @@ using namespace std;
 
 class bt {
 
-private:
+protected:
 	int selection;
-	double temp;
+	double measured;
+	string status;
 
 public:
-	void getInfo();
-	void getStatus();
+	int getInfo();
+	string getStatus(int temp);
 
 };
 
-void bt::getInfo() {
+int bt::getInfo() {
 
-	cout << "What was the obtained temperature? ";
-	cin >> temp;
+	cout << "What was the obtained temperature in F? ";
+	cin >> measured;
 
-	cout << "How was the blood temperature test taken?"
-			"\n1. Orally"
-			"\n2. Rectally"
+	cout << "What type of temperature test was it?"
+			"\n1. Oral"
+			"\n2. Rectal"
 			"\n3. Axillary"
-			"\n4. Through the ear"
-			"\n5. On the skin\n";
+			"\n4. Ear"
+			"\n5. Skin\n";
 	cin >> selection;
 
-	switch (selection) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	case 4:
-		break;
-	case 5:
-		break;
-	}
+	cout << "\nWould you like to add a comment? (yes/no) ";
+	// comment
+
+	return selection;
 
 }
 
 // divide into types
 
-class btTypes {
+class rectal: public bt {
 
 private:
 
 public:
-	bt direct;
-	bt rectally;
-	bt axillary;
+	double actualTemp() {
+		return measured + 0.6;
+	}
 
 };
+
+class axillary: public bt {
+
+private:
+
+public:
+	double actualTemp() {
+		return measured - 0.3;
+	}
+
+};
+
+string bt::getStatus(int temp) {
+	if ((temp > 97.8) & (temp < 99)) {
+		status = "fine";
+	}
+	else if (temp > 99.6) {
+		status = "fever";
+	}
+	else if (temp < 95) {
+		status = "hypothermia";
+	}
+
+	return status;
+}
 
 /****
  *
@@ -97,7 +115,7 @@ private:
 
 public:
 	void getInfo();
-	void getStatus();
+	string getStatus();
 };
 
 void pr::getInfo() {
@@ -109,7 +127,7 @@ void pr::getInfo() {
 	// comment
 }
 
-void pr::getStatus() {
+string pr::getStatus() {
 	if (athlete == "yes") {
 		if ((bpm < 40) | (bpm > 100)) {
 			status = "problematic";
@@ -122,6 +140,7 @@ void pr::getStatus() {
 		}
 		else status = "problematic";
 	}
+	return status;
 }
 
 
@@ -141,7 +160,7 @@ private:
 
 public:
 	void getInfo();
-	void getStatus();
+	string getStatus();
 };
 
 void rr::getInfo() {
@@ -153,11 +172,12 @@ void rr::getInfo() {
 	// comment
 }
 
-void rr::getStatus() {
+string rr::getStatus() {
 	if ((difficulty == "yes") | (numBreaths > 16)) {
 		status = "problematic";
 	}
 	else status = "fine";
+	return string;
 }
 
 
@@ -176,7 +196,7 @@ private:
 
 public:
 	void getInfo();
-	void getStatus();
+	string getStatus();
 };
 
 void bp::getInfo() {
@@ -188,7 +208,7 @@ void bp::getInfo() {
 	// comment
 }
 
-void bp::getStatus() {
+string bp::getStatus() {
 	if ((systolic > 140) & (diastolic > 90)) {
 		status = "high blood pressure (hypertension)";
 	}
@@ -198,6 +218,7 @@ void bp::getStatus() {
 	else {
 		status = "normal blood pressure";
 	}
+	return status;
 }
 
 
