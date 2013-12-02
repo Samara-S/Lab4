@@ -9,6 +9,29 @@
 #include <string>
 using namespace std;
 
+//// ALL PHYSICAL TESTS
+
+class allTests {
+protected:
+	int choice;
+public:
+	void chooseTest();
+};
+
+void allTests::chooseTest () {
+	cout << "\nWhat test would you like to enter data from? "
+			"\n1. Urine test"
+			"\n2. Body temperature test"
+			"\n3. Pulse rate"
+			"\n4. Respiration rate"
+			"\n5. Blood pressure";
+	cin >> choice;
+}
+
+/*
+ *
+ */
+
 // URINE TESTS
 
 class ut {
@@ -74,55 +97,58 @@ void rapid::getInfo() {
 	cout << "\nWas there a presence of white blood cells? (yes/no) ";
 	cin >> results[7];
 
+	cout << "\nWould you like to add a comment? (yes/no) ";
+	// comment
+
 }
 
 void rapid::detectAbnormal() {
 
-if (ph < 5) {
-	if (status == "") {
-		status = "kidney stones";
+	if (ph < 5) {
+		if (status == "") {
+			status = "kidney stones";
+		}
+		else {
+			status = ", kidney stones";
+		}
 	}
-	else {
-		status = ", kidney stones";
+	else if (ph > 7) {
+		if (status == "") {
+			status = "urinary tract infection";
+		}
+		else {
+			status = ", urinary tract infection";
+		}
 	}
-}
-else if (ph > 7) {
-	if (status == "") {
-		status = "urinary tract infection";
-	}
-	else {
-		status = ", urinary tract infection";
-	}
-}
 
-if (((results[0] | results[4] | results[5] | results[6]) == "yes")) {
-	if (status == "") {
-		status = "kidney disease/inflammation";
+	if (((results[0] | results[4] | results[5] | results[6]) == "yes")) {
+		if (status == "") {
+			status = "kidney disease/inflammation";
+		}
+		else {
+			status = ", kidney disease/inflammation";
+		}
 	}
-	else {
-		status = ", kidney disease/inflammation";
+	else if (((results[1] | results[3]) == "yes")) {
+		if (status == "") {
+			status = "diabetes mellitus";
+		}
+		else {
+			status = ", diabetes mellitus";
+		}
 	}
-}
-else if (((results[1] | results[3]) == "yes")) {
-	if (status == "") {
-		status = "diabetes mellitus";
+	else if (((results[2] | results[7]) == "yes")) {
+		if (status == "") {
+			status = "bacterial infection";
+		}
+		else {
+			status = ", bacterial infection";
+		}
 	}
-	else {
-		status = ", diabetes mellitus";
-	}
-}
-else if (((results[2] | results[7]) == "yes")) {
-	if (status == "") {
-		status = "bacterial infection";
-	}
-	else {
-		status = ", bacterial infection";
-	}
-}
 
-if (status == "") {
-	status = "fine";
-}
+	if (status == "") {
+		status = "fine";
+	}
 
 }
 
@@ -149,39 +175,43 @@ void urinalysis::getInfo() {
 	cout << "\nWas there a presence of crystals? (yes/no) ";
 	cin >> results[2];
 	cout << "\nWas there a presence of epithelial cells? (yes/no) ";
+	cin >> results[3];
+
+	cout << "\nWould you like to add a comment? (yes/no) ";
+	// comment
 
 };
 
 void urinalysis::detectAbnormal() {
 
-if ((results[0] == "yes")) {
-	if (status == "") {
-		status = "kidneys not filtering properly";
+	if ((results[0] == "yes")) {
+		if (status == "") {
+			status = "kidneys not filtering properly";
+		}
+		else {
+			status = ", kidneys not filtering properly";
+		}
 	}
-	else {
-		status = ", kidneys not filtering properly";
+	else if (results[1]) {
+		if (status == "") {
+			status = "kidney disease";
+		}
+		else {
+			status = ", kidney disease";
+		}
 	}
-}
-else if (results[1]) {
-	if (status == "") {
-		status = "kidney disease";
+	else if (((results[2] | results[3]) == "yes")) {
+		if (status == "") {
+			status = "problematic";
+		}
+		else {
+			status = ", problematic";
+		}
 	}
-	else {
-		status = ", kidney disease";
-	}
-}
-else if (((results[2] | results[3]) == "yes")) {
-	if (status == "") {
-		status = "problematic";
-	}
-	else {
-		status = ", problematic";
-	}
-}
 
-if (status == "") {
-	status = "fine";
-}
+	if (status == "") {
+		status = "fine";
+	}
 
 }
 
@@ -390,6 +420,58 @@ string bp::getStatus() {
 
 
 int main() {
+
+	allTests go;
+
+	go.chooseTest();
+
+	if (go.choice == 1) {
+		ut urine;
+		urine.typeTest();
+		if (urine.selection == 1) {
+			rapid rt;
+			rt.getInfo();
+			rt.detectAbnormal();
+			if (rt.status == "fine") {
+				cout << "\nThe patient's rapid urine test did not return any conclusive results.";
+			}
+			else {
+				cout << "\nThe patient's rapid urine test returned troubling results. The patient may be suffering from: \n--- ";
+			}
+		}
+		else if (urine.selection == 2) {
+			urinalysis ua;
+			ua.getInfo();
+			ua.detectAbnormal();
+			if (ua.status == "fine") {
+				cout << "\nThe patient's urinalysis test did not return any conclusive results.";
+			}
+			else if (ua.status == "problematic") {
+				cout << "\nThe patient's urinalysis test returned troubling results.";
+			}
+			else {
+				cout << "\nThe patient's urinalysis test returned troubling results. The patient may be suffering from: \n--- ";
+			}
+		}
+	}
+	else if (go.choice == 2) {
+		bt body;
+		body.typeTest;
+		if (body.selection == (1 | 4 | 5)) {
+			body.getStatus(body.measured);
+		}
+		else if (body.selection == 2) {
+			rectal bodyt;
+			bodyt.getStatus(bodyt.actualTemp());
+		}
+		else if (body.selection == 3) {
+			axillary bodyte;
+			bodyte.getStatus(bodyte.actualTemp());
+		}
+	}
+	else if (go.choice == 3) {
+
+	}
 
 	return 0;
 
