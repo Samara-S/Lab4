@@ -120,7 +120,23 @@ Cholesterol::getDL():getBC(){
 }
 
 Cholesterol::checkDL(){
-	//Similar to checkBC but for IgGs
+	if(TotalCholesterol>=0 && TotalCholesterol<=239){
+		cout << "Total Cholesterol Normal\n";
+	} else {
+		cout << "Total Cholesterol Abnormal\n";
+	}
+
+	if (LDL>=0 && LDL<=159){
+		cout << "LDL Normal";
+	} else {
+		cout << "LDL Abnormal";
+	}
+
+	if (HDL>=0 && HDL<=59){
+			cout << "HDL Normal";
+		} else {
+			cout << "HDL Abnormal";
+		}
 }
 
 //CoagulationMarkers to Proteins and other coagulants
@@ -137,16 +153,39 @@ public:
 };
 
 CoagulationMarkers::getCM():getBC(){
-	cout << "What is the Serum IgG?\n";
-	cin >> IgGSerum;
-	cout << "What is the CSF IgG?\n";
-	cin >> IgGCSF;
-	cout << "What is the IgG Ratio?\n";
-	cin >> IgGRatio;
+	cout << "What is the C Protein?\n";
+	cin >> proteinC;
+	cout << "What is the S Protein?\n";
+	cin >> proteinS;
+	cout << "What is the Prothrombin?\n";
+	cin >> PTT;
+	cout << "What is the Homocysteine?\n";
+	cin >> Homocysteine;
 	cout << "Any comments?";
-	cin >> IgGcomment;
+	cin >> CMcomment;
 }
 
 CoagulationMarkers::checkCM(){
-	//Similar to check BC but for CMs
+	if(proteinC>=0.6 && proteinC<=3.6){
+		cout << "C Protein Normal\n";
+	} else {
+		cout << "C Protein Abnormal\n";
+	}
+
+	if (proteinS>=1.2 && proteinS<=7.2){
+		cout << "S Protein Normal";
+	} else {
+		cout << "S Protein Abnormal";
+	}
+
+	if (PTT>=10 && PTT<=15){
+			cout << "Prothrombim Normal";
+		} else {
+			cout << "Prothrombin Abnormal";
+		}
+	if (Homocysteine>=0.9 && Homocysteine<=1.2){
+				cout << "Homocysteine Normal";
+			} else {
+				cout << "Homocysteine Abnormal";
+			}
 }
